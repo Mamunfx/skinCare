@@ -1,9 +1,11 @@
 import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from './../AuthProvider';
+import LoadingState from './../Components/LoadingState';
+import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
-  const { userLogin, user,notifyError,notify} = useContext(AuthContext);
+  const { userLogin, user,notifyError,notify,loading,handleGoogleSignIn,} = useContext(AuthContext);
   const navigate = useNavigate(); 
   const location = useLocation(); 
   const from = location.state?.from?.pathname || '/';
@@ -18,6 +20,7 @@ const Login = () => {
 
     if (!user) {
       try {
+        
         await userLogin(email, password);
         notify('Logged In !')
         navigate(from, { replace: true });
@@ -33,7 +36,12 @@ const Login = () => {
 
   return (
     <div>
-      <div className="hero bg-blue-600 min-h-fit rounded-lg py-24">
+      
+      {
+        loading? 
+        <LoadingState></LoadingState>
+        :
+        <div className="hero bg-blue-600 min-h-fit rounded-lg py-24">
         <div className="hero-content flex-col lg:flex-row-reverse gap-16">
           <div className="text-center lg:text-left text-white">
             <h1 className="text-5xl font-bold">Sign in now!</h1>
@@ -68,7 +76,7 @@ const Login = () => {
                   required
                 />
                 <label className="label">
-                  <Link to="/signup">
+                  <Link to="/Signup">
                     Don't have an account?
                     <span className="text-blue-600 font-semibold"> Sign up</span>
                   </Link>
@@ -82,10 +90,28 @@ const Login = () => {
                   Sign In
                 </button>
               </div>
+              <button
+                  type="button"
+                  className="submit btn text-white bg-blue-600 w-full"
+                  onClick={() => handleGoogleSignIn()
+                    .then(() => {
+                      navigate(from, { replace: true });
+                    })
+                    .catch((err) => {
+                      setErrorMessage(err.message);
+                    })
+                  }
+                >
+                  <div className="flex gap-2 items-center">
+                    <p>Google</p>
+                    <FcGoogle className="text-lg" />
+                  </div>
+                </button>
             </form>
           </div>
         </div>
       </div>
+      }
     </div>
   );
 };
