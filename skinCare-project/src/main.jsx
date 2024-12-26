@@ -7,6 +7,8 @@ import {
 import './index.css'
 import Home from './Layouts/Home';
 import Root from './Layouts/Root';
+import AuthProvider from './AuthProvider';
+import Queries from './Layouts/Queries';
 
 const router = createBrowserRouter([
   {
@@ -16,13 +18,19 @@ const router = createBrowserRouter([
       {
         path:"",
         element:<Home></Home>,
-      }
+      },
+      {
+        path:"/Queries",
+        element:<Queries></Queries>,
+      },
     ]
   },
 ]);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-   <RouterProvider router={router} />
+    <AuthProvider>
+    <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>,
 )
