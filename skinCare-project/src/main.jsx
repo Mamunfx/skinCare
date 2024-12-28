@@ -31,7 +31,7 @@ const router = createBrowserRouter([
       },
       {
         path:"/Queries",
-        element:<Queries></Queries>,
+        element:<AllQue></AllQue>,
       },
       {
         path:"/login",
@@ -55,10 +55,10 @@ const router = createBrowserRouter([
       },
       {
         path:"/AddQue",
-        element:<AllQue></AllQue>,
+        element:<AddQue></AddQue>,
       },
       {
-        path:"/QueDetails",
+        path:"/QueDetails/:id",
         element:<QueDetails></QueDetails>,
       },
     ]

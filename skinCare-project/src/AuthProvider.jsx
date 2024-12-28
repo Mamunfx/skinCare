@@ -1,19 +1,24 @@
 import {
-  createUserWithEmailAndPassword, 
-  GoogleAuthProvider, onAuthStateChanged, 
-  signInWithEmailAndPassword, signInWithPopup, 
-  signOut, updateProfile } from "firebase/auth";
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+  updateProfile
+} from "firebase/auth";
 import { ToastContainer, toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { createContext, useEffect, useState } from "react";
 import { auth } from './firebase.init';
+import LoadingState from './Components/LoadingState';
 
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  
+
   const notify = (message = 'Success!') => toast.success(message, {
     position: "top-center",
     autoClose: 5000,
@@ -81,16 +86,19 @@ const AuthProvider = ({ children }) => {
   const updateUserProfile = (profile) => {
     setLoading(true);
     return updateProfile(auth.currentUser, profile)
-      .then(() => notify(' Done !'))
+      .then(() => notify('Profile updated!'))
       .catch(error => notifyError(error.message))
       .finally(() => setLoading(false));
   };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      console.log('Auth state changed:', currentUser);
       setUser(currentUser);
       setLoading(false);
     });
+
+    // Cleanup subscription on unmount
     return () => unsubscribe();
   }, []);
 
@@ -106,6 +114,10 @@ const AuthProvider = ({ children }) => {
     notifyError,
     updateUserProfile
   };
+
+  if (loading) {
+    return <LoadingState/>;
+  }
 
   return (
     <AuthContext.Provider value={authInfo}>

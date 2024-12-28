@@ -1,11 +1,45 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const AllQue = () => {
-    return (
-        <div>
-            <h1>All the Queries of this website</h1>
+  
+  const [queries, setQueries] = useState([]);
+
+  useEffect(() => {
+    const fetchQueries = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5001/queries`);
+        setQueries(response.data);
+      } catch (error) {
+        console.error('Error fetching queries:', error);
+      }
+    };
+
+    fetchQueries();
+  }, []);
+
+  return (
+    <div className='space-y-6'>
+      <div className="container mx-auto py-6 ">
+        <h2 className="text-3xl font-bold text-center mb-6">All Queries</h2>
+        <div className=" grid grid-cols-3 gap-2">
+          {queries.map(query => (
+            <div key={query._id} className="p-4 border rounded-lg shadow-sm bg-white">
+              <h3 className="text-xl font-bold">{query.queryTitle}</h3>
+              <p><strong>Product Name:</strong> {query.productName}</p>
+              <p><strong>Product Brand:</strong> {query.productBrand}</p>
+              <p><strong>Reason:</strong> {query.boycottingReasonDetails}</p>
+              <p><strong>Posted on:</strong> {new Date(query.createdAt).toLocaleString()}</p>
+              <img src={query.productImageUrl} alt={query.productName} className="mt-4 max-w-full h-32"/>
+              <Link className='btn' to={`/QueDetails/${query._id}`}>Details</Link>
+            </div>
+          ))}
+          {queries.length === 0 && <p className="text-center text-gray-500">No queries found.</p>}
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default AllQue;
