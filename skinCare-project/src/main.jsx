@@ -8,7 +8,6 @@ import './index.css'
 import Home from './Layouts/Home';
 import Root from './Layouts/Root';
 
-import Queries from './Layouts/Queries';
 import Login from './Layouts/Login';
 import Signup from './Layouts/Singup';
 import AuthProvider from './AuthProvider';
@@ -19,6 +18,7 @@ import AddQue from './Layouts/AddQue';
 import AllQue from './Layouts/AllQue';
 import QueDetails from './Layouts/QueDetails';
 import NotFound from './Layouts/NotFound';
+import UpdateQue from './Layouts/UpdateQue';
 
 const router = createBrowserRouter([
   {
@@ -60,6 +60,10 @@ const router = createBrowserRouter([
       {
         path:"/QueDetails/:id",
         element:<QueDetails></QueDetails>,
+      },
+      {
+        path:"/UpdateQue/:id",
+        element:<UpdateQue></UpdateQue>,
       },
     ]
   },

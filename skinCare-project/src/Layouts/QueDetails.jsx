@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Navigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import LoadingState from '../Components/LoadingState';
 import { AuthContext } from '../AuthProvider';
 
 const QueDetails = () => {
-  const { id } = useParams(); // Extract query ID from URL
-  const { user } = useContext(AuthContext); // User context for logged-in user details
+  const { id } = useParams();
+  const { user } = useContext(AuthContext);
   const [queryDetails, setQueryDetails] = useState(null);
   const [recommendations, setRecommendations] = useState([]);
   const [formState, setFormState] = useState({
@@ -18,7 +18,6 @@ const QueDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch query details and comments
   useEffect(() => {
     const fetchQueryDetails = async () => {
       try {
@@ -37,31 +36,32 @@ const QueDetails = () => {
     fetchQueryDetails();
   }, [id]);
 
-  // Handle form input change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormState({ ...formState, [name]: value });
   };
 
-  // Submit a new recommendation
   const handleRecommendationSubmit = async (e) => {
     e.preventDefault();
-
     const newRecommendation = {
       query_id: id,
       recommendationTitle: formState.recommendationTitle,
       recommendedProductName: formState.recommendedProductName,
       recommendedProductImage: formState.recommendedProductImage,
       recommendationReason: formState.recommendationReason,
-      userEmail: user?.email, // From AuthContext
+      userEmail: user?.email,
       recommenderEmail: user?.email,
       recommenderName: user?.displayName || 'Anonymous',
+      created_at: new Date().toISOString(),
     };
 
     try {
       const response = await axios.post('http://localhost:5001/comments', newRecommendation);
+      const newComment = response.data;
+      
+      const commentsResponse = await axios.get(`http://localhost:5001/Indivucomments/${id}`);
+        setRecommendations(commentsResponse.data);
 
-      setRecommendations([...recommendations, response.data]); // Add new recommendation to the list
       setQueryDetails((prev) => ({
         ...prev,
         recommendationCount: prev.recommendationCount + 1,
@@ -72,12 +72,9 @@ const QueDetails = () => {
         recommendedProductImage: '',
         recommendationReason: '',
       });
-      
     } catch (err) {
       console.error('Error submitting recommendation:', err);
     }
-    
-  
   };
 
   if (loading) return <LoadingState />;
@@ -89,7 +86,6 @@ const QueDetails = () => {
 
       {queryDetails ? (
         <div className="p-4 border rounded-lg shadow-sm bg-white">
-          {/* Query Details */}
           <h2 className="text-xl font-bold">{queryDetails.queryTitle}</h2>
           <p><strong>Product Name:</strong> {queryDetails.productName}</p>
           <p><strong>Product Brand:</strong> {queryDetails.productBrand}</p>
@@ -100,7 +96,6 @@ const QueDetails = () => {
           <p><strong>Recommendation Count:</strong> {queryDetails.recommendationCount}</p>
           <img src={queryDetails.productImageUrl} alt={queryDetails.productName} className="mt-4 max-w-full h-auto" />
 
-          {/* Recommendation Form */}
           <div className="mt-6">
             <h3 className="text-lg font-bold">Add a Recommendation</h3>
             <form onSubmit={handleRecommendationSubmit} className="mb-4">
@@ -150,7 +145,6 @@ const QueDetails = () => {
             </form>
           </div>
 
-          {/* Display Recommendations */}
           <div className="mt-6">
             <h3 className="text-lg font-bold">Recommendations</h3>
             <div className="space-y-2">
@@ -180,3 +174,4 @@ const QueDetails = () => {
 };
 
 export default QueDetails;
+

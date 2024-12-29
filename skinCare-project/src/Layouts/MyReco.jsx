@@ -24,6 +24,15 @@ const MyReco = () => {
     fetchUserRecommendations();
   }, [user.email]);
 
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5001/comments/${id}`);
+      setRecommendations((prevRecommendations) => prevRecommendations.filter((rec) => rec._id !== id));
+    } catch (error) {
+      console.error('Error deleting recommendation:', error);
+    }
+  };
+
   if (loading) {
     return <LoadingState />;
   }
@@ -44,6 +53,7 @@ const MyReco = () => {
                 <th className="py-2 px-4 border-b">Product Name</th>
                 <th className="py-2 px-4 border-b">Reason</th>
                 <th className="py-2 px-4 border-b">Date</th>
+                <th className="py-2 px-4 border-b">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -51,9 +61,11 @@ const MyReco = () => {
                 <tr key={rec._id}>
                   <td className="py-2 px-4 border-b">{rec?.recommendationTitle}</td>
                   <td className="py-2 px-4 border-b">{rec?.recommendedProductName}</td>
-                  
                   <td className="py-2 px-4 border-b">{rec?.recommendationReason}</td>
                   <td className="py-2 px-4 border-b">{new Date(rec.created_at).toLocaleString()}</td>
+                  <td className="py-2 px-4 border-b">
+                    <button className="btn btn-danger" onClick={() => handleDelete(rec._id)}>Delete</button>
+                  </td>
                 </tr>
               ))}
             </tbody>
