@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import LoadingState from '../Components/LoadingState';
 import { AuthContext } from '../AuthProvider';
@@ -72,9 +72,12 @@ const QueDetails = () => {
         recommendedProductImage: '',
         recommendationReason: '',
       });
+      
     } catch (err) {
       console.error('Error submitting recommendation:', err);
     }
+    
+  
   };
 
   if (loading) return <LoadingState />;
