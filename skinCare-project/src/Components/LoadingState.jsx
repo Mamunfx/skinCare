@@ -4,7 +4,7 @@ const LoadingState = () => {
     return (
         
         <div className='w-16 mx-auto my-12'>
-            <span className="loading loading-bars loading-lg"></span>
+            <span className="loading loading-spinner loading-lg"></span>
         </div>
     );
 };
