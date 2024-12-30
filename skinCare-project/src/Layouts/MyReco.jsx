@@ -9,20 +9,21 @@ const MyReco = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchUserRecommendations = async () => {
-      try {
-        const response = await axios.get(`http://localhost:5001/Comments/${user.email}`);
-        setRecommendations(response.data);
-      } catch (error) {
-        setError('Error fetching recommendations.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUserRecommendations();
-  }, [user.email]);
+    useEffect(() => {
+      const fetchUserRecommendations = async () => {
+        try {
+          const response = await axios.get(`http://localhost:5001/Comments/${user.email}`);
+          setRecommendations(response.data);
+        } catch (error) {
+          setError('Error fetching recommendations.');
+        } finally {
+          setLoading(false);
+        }
+      };
+  
+      fetchUserRecommendations();
+    }, [user.email]);
+  
 
   const handleDelete = async (id) => {
     try {
