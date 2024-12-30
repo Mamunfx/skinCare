@@ -12,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { createContext, useEffect, useState } from "react";
 import { auth } from './firebase.init';
 import LoadingState from './Components/LoadingState';
-
+import axios from 'axios';
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
@@ -93,12 +93,29 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log('Auth state changed:', currentUser);
+      
+      if (currentUser?.email) {
+        const user = {email: currentUser.email};
+        axios.post('http://localhost:5001/JWT',user,{
+          withCredentials:true
+        })
+        .then(res=> {
+          console.log('login token',res.data);
+          setLoading(false)
+        })
+      }
+      else{
+        axios.post('http://localhost:5001/logout',{},{
+          withCredentials:true
+        })
+        .then(res=>{
+          console.log('logout',res.data);
+          setLoading(false)
+        })
+      }
       setUser(currentUser);
       setLoading(false);
     });
-
-    // Cleanup subscription on unmount
     return () => unsubscribe();
   }, []);
 

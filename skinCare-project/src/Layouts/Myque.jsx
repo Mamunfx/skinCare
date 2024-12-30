@@ -2,16 +2,19 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from './../AuthProvider';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const Myque = () => {
   const { user } = useContext(AuthContext);
   const userEmail = user?.email;
   const [queries, setQueries] = useState([]);
 
+  const axiosInstance=useAxiosSecure();
+
   useEffect(() => {
     const fetchQueries = async () => {
       try {
-        const response = await axios.get(`http://localhost:5001/myqueries/${userEmail}`);
+        const response = await axiosInstance.get(`/myqueries/${userEmail}`,{withCredentials:true})
         const sortedQueries = response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         setQueries(sortedQueries);
       } catch (error) {
@@ -24,7 +27,7 @@ const Myque = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5001/queries/${id}`);
+      await axios.delete(`http://localhost:5001/queries/${id}`,{withCredentials:true});
       setQueries((prevQueries) => prevQueries.filter((query) => query._id !== id));
     } catch (error) {
       console.error('Error deleting query:', error);

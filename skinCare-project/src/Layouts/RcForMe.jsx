@@ -14,7 +14,9 @@ const RcForMe = () => {
   useEffect(() => {
     const fetchQueries = async () => {
       try {
-        const response = await axios.get(`http://localhost:5001/myqueries/${userEmail}`);
+        const response = await axios.get(`http://localhost:5001/myqueries/${userEmail}`,{
+          withCredentials:true
+        });
         setQueries(response.data);
       } catch (error) {
         console.error('Error fetching queries:', error);
@@ -31,7 +33,7 @@ const RcForMe = () => {
       try {
         const allRecommendations = await Promise.all(
           queries.map(async (query) => {
-            const response = await axios.get(`http://localhost:5001/Indivucomments/${query._id}`);
+            const response = await axios.get(`http://localhost:5001/Indivucomments/${query._id}`,{withCredentials:true});
             return response.data;
           })
         );

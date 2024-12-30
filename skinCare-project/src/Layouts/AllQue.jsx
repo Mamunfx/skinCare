@@ -11,7 +11,9 @@ const AllQue = () => {
   useEffect(() => {
     const fetchQueries = async () => {
       try {
-        const response = await axios.get('http://localhost:5001/queries');
+        const response = await axios.get('http://localhost:5001/queries',{
+          withCredentials:true
+        });
         const sortedQueries = response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         setQueries(sortedQueries);
         setFilteredQueries(sortedQueries);
@@ -26,7 +28,9 @@ const AllQue = () => {
   const handleSearch = async () => {
     if (searchTerm) {
       try {
-        const response = await axios.get(`http://localhost:5001/searchqueries?productName=${searchTerm}`);
+        const response = await axios.get(`http://localhost:5001/searchqueries?productName=${searchTerm}`,{
+          withCredentials:true
+        });
         setFilteredQueries(response.data);
       } catch (error) {
         console.error('Error fetching search results:', error);

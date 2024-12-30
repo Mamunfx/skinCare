@@ -12,7 +12,7 @@ const MyReco = () => {
     useEffect(() => {
       const fetchUserRecommendations = async () => {
         try {
-          const response = await axios.get(`http://localhost:5001/Comments/${user.email}`);
+          const response = await axios.get(`http://localhost:5001/Comments/${user.email}`,{withCredentials:true});
           setRecommendations(response.data);
         } catch (error) {
           setError('Error fetching recommendations.');
@@ -27,7 +27,7 @@ const MyReco = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5001/comments/${id}`);
+      await axios.delete(`http://localhost:5001/comments/${id}`,{withCredentials:true});
       setRecommendations((prevRecommendations) => prevRecommendations.filter((rec) => rec._id !== id));
     } catch (error) {
       console.error('Error deleting recommendation:', error);

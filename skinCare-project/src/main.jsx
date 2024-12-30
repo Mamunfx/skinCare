@@ -19,6 +19,7 @@ import AllQue from './Layouts/AllQue';
 import QueDetails from './Layouts/QueDetails';
 import NotFound from './Layouts/NotFound';
 import UpdateQue from './Layouts/UpdateQue';
+import Private_Route from './Components/PrivateRoute';
 
 const router = createBrowserRouter([
   {
@@ -43,27 +44,27 @@ const router = createBrowserRouter([
       },
       {
         path:"/RcForMe",
-        element:<RcForMe></RcForMe>,
+        element:<Private_Route><RcForMe></RcForMe></Private_Route>,
       },
       {
         path:"/Myque",
-        element:<Myque></Myque>,
+        element:<Private_Route><Myque></Myque></Private_Route>,
       },
       {
         path:"/MyReco",
-        element:<MyReco></MyReco>,
+        element:<Private_Route><MyReco></MyReco></Private_Route>,
       },
       {
         path:"/AddQue",
-        element:<AddQue></AddQue>,
+        element:<Private_Route><AddQue></AddQue></Private_Route>,
       },
       {
         path:"/QueDetails/:id",
-        element:<QueDetails></QueDetails>,
+        element:<Private_Route><QueDetails></QueDetails></Private_Route>,
       },
       {
         path:"/UpdateQue/:id",
-        element:<UpdateQue></UpdateQue>,
+        element:<Private_Route><UpdateQue></UpdateQue></Private_Route>,
       },
     ]
   },

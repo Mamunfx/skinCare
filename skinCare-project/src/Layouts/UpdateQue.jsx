@@ -49,7 +49,7 @@ const UpdateQue = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5001/queries/${id}`, formState);
+      await axios.put(`http://localhost:5001/queries/${id}`, formState,{withCredentials:true});
       navigate('/Myque');
     } catch (error) {
       setError('Error updating query.');

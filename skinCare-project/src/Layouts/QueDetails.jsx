@@ -56,10 +56,10 @@ const QueDetails = () => {
     };
 
     try {
-      const response = await axios.post('http://localhost:5001/comments', newRecommendation);
+      const response = await axios.post('http://localhost:5001/comments', newRecommendation,{withCredentials:true});
       const newComment = response.data;
       
-      const commentsResponse = await axios.get(`http://localhost:5001/Indivucomments/${id}`);
+      const commentsResponse = await axios.get(`http://localhost:5001/Indivucomments/${id}`,{withCredentials:true});
         setRecommendations(commentsResponse.data);
 
       setQueryDetails((prev) => ({

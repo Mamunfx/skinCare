@@ -4,9 +4,9 @@ import { AuthContext } from './../AuthProvider';
 
 const AddQue = () => {
   const {user}=useContext(AuthContext);
-  const userProfileImage= user.photoURL;
-  const userEmail= user.email;
-  const userName= user.displayName;
+  const userProfileImage= user?.photoURL;
+  const userEmail= user?.email;
+  const userName= user?.displayName;
   const [formData, setFormData] = useState({
     productName: '',
     productBrand: '',
@@ -32,7 +32,9 @@ const AddQue = () => {
     };
 
     try {
-      const response = await axios.post('http://localhost:5001/queries', queryData);
+      const response = await axios.post('http://localhost:5001/queries', queryData,{
+        withCredentials:true
+      });
       console.log('Query added:', response.data);
       // Optionally reset the form
       setFormData({
