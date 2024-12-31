@@ -29,32 +29,32 @@ const RecentQue = () => {
         {queries.map((query) => (
             
             <div className="card bg-base-100  shadow-xl">
-        <figure className="px-10 pt-10">
-          <img
-            src={query.productImageUrl}
-            className="rounded-xl"
-          />
-        </figure>
-        <div className="card-body items-center text-center">
-        <h2 className="card-title">{query.queryTitle}</h2>
-              <p>
-                <strong>Product Name:</strong> {query.productName}
-              </p>
-              <p>
-                <strong>Product Brand:</strong> {query.productBrand}
-              </p>
-              <p>
-                <strong>Reason:</strong> {query.boycottingReasonDetails}
-              </p>
-              <p>
-                <strong>Posted on:</strong>{" "}
-                {new Date(query.createdAt).toLocaleString()}
-              </p>
-              <Link className="btn" to={`/QueDetails/${query._id}`}>
-                View Details
-              </Link>
-        </div>
-      </div>
+           <figure className="px-10 pt-10">
+             <img
+               src={query.productImageUrl}
+               className="rounded-xl h-48 w-full"
+             />
+           </figure>
+           <div className="card-body items-center text-center">
+           <h2 className="card-title">{query.queryTitle}</h2>
+                 <p>
+                   <strong>Product Name:</strong> {query.productName}
+                 </p>
+                 <p>
+                   <strong>Product Brand:</strong> {query.productBrand}
+                 </p>
+                 <p>
+                   <strong>Reason:</strong> {query.boycottingReasonDetails}
+                 </p>
+                 <p>
+                   <strong>Posted on:</strong>{" "}
+                   {new Date(query.createdAt).toLocaleString()}
+                 </p>
+                 <Link className="btn bg-pink-200" to={`/QueDetails/${query._id}`}>
+                   View Details
+                 </Link>
+           </div>
+         </div>
           
         ))}
         {queries.length === 0 && (

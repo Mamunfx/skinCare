@@ -60,35 +60,45 @@ const RcForMe = () => {
 
   return (
     <div className="container mx-auto py-6">
-      <h2 className="text-3xl font-bold text-center mb-6">Recommendations for You</h2>
+      <h2 className="text-3xl font-bold text-center mb-6">
+        Recommendations for You
+      </h2>
       {recommendations.length > 0 ? (
-        <div className="overflow-x-auto">
-          <table className="min-w-full bg-white border rounded-lg">
-            <thead>
-              <tr>
-                <th className="py-2 px-4 border-b">Title</th>
-                <th className="py-2 px-4 border-b">Product Name</th>
-                <th className="py-2 px-4 border-b">Reason</th>
-                <th className="py-2 px-4 border-b">User Email</th>
-                <th className="py-2 px-4 border-b">Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              {recommendations.map((rec, index) => (
-                <tr key={index}>
-                  <td className="py-2 px-4 border-b">{rec.recommendationTitle}</td>
-                  <td className="py-2 px-4 border-b">{rec.recommendedProductName}</td>
-                  <td className="py-2 px-4 border-b">{rec.recommendationReason}</td>
-                  <td className="py-2 px-4 border-b">{rec.userEmail}</td>
-                  <td className="py-2 px-4 border-b">{new Date(rec.created_at).toLocaleString()}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+       <div className="overflow-x-auto">
+       <table className="table">
+         {/* head */}
+         <tr>
+                     <th className="py-2 px-4 border-b">Title</th>
+                     <th className="py-2 px-4 border-b">Product Name</th>
+                     <th className="py-2 px-4 border-b">Reason</th>
+                     <th className="py-2 px-4 border-b">User Email</th>
+                     <th className="py-2 px-4 border-b">Date</th>
+                   </tr>
+                   <tbody>
+                   {recommendations.map((rec, index) => (
+                     <tr key={index}>
+                       <td className="py-2 px-4 border-b">
+                         {rec.recommendationTitle}
+                       </td>
+                       <td className="py-2 px-4 border-b">
+                         {rec.recommendedProductName}
+                       </td>
+                       <td className="py-2 px-4 border-b">
+                         {rec.recommendationReason}
+                       </td>
+                       <td className="py-2 px-4 border-b">{rec.userEmail}</td>
+                       <td className="py-2 px-4 border-b">
+                         {new Date(rec.created_at).toLocaleString()}
+                       </td>
+                     </tr>
+                   ))}
+                 </tbody>
+       </table>
+     </div>
       ) : (
         <p>No recommendations found.</p>
       )}
+
     </div>
   );
 };

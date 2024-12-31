@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import LoadingState from '../Components/LoadingState';
-import { AuthContext } from '../AuthProvider';
+import React, { useState, useEffect, useContext } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import LoadingState from "../Components/LoadingState";
+import { AuthContext } from "../AuthProvider";
 
 const QueDetails = () => {
   const { id } = useParams();
@@ -10,10 +10,10 @@ const QueDetails = () => {
   const [queryDetails, setQueryDetails] = useState(null);
   const [recommendations, setRecommendations] = useState([]);
   const [formState, setFormState] = useState({
-    recommendationTitle: '',
-    recommendedProductName: '',
-    recommendedProductImage: '',
-    recommendationReason: '',
+    recommendationTitle: "",
+    recommendedProductName: "",
+    recommendedProductImage: "",
+    recommendationReason: "",
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -21,13 +21,17 @@ const QueDetails = () => {
   useEffect(() => {
     const fetchQueryDetails = async () => {
       try {
-        const queryResponse = await axios.get(`http://localhost:5001/queries/${id}`);
+        const queryResponse = await axios.get(
+          `http://localhost:5001/queries/${id}`
+        );
         setQueryDetails(queryResponse.data);
 
-        const commentsResponse = await axios.get(`http://localhost:5001/Indivucomments/${id}`);
+        const commentsResponse = await axios.get(
+          `http://localhost:5001/Indivucomments/${id}`
+        );
         setRecommendations(commentsResponse.data);
       } catch (err) {
-        setError('Error fetching query details or recommendations.');
+        setError("Error fetching query details or recommendations.");
       } finally {
         setLoading(false);
       }
@@ -51,29 +55,36 @@ const QueDetails = () => {
       recommendationReason: formState.recommendationReason,
       userEmail: user?.email,
       recommenderEmail: user?.email,
-      recommenderName: user?.displayName || 'Anonymous',
+      recommenderName: user?.displayName || "Anonymous",
       created_at: new Date().toISOString(),
     };
 
     try {
-      const response = await axios.post('http://localhost:5001/comments', newRecommendation,{withCredentials:true});
+      const response = await axios.post(
+        "http://localhost:5001/comments",
+        newRecommendation,
+        { withCredentials: true }
+      );
       const newComment = response.data;
-      
-      const commentsResponse = await axios.get(`http://localhost:5001/Indivucomments/${id}`,{withCredentials:true});
-        setRecommendations(commentsResponse.data);
+
+      const commentsResponse = await axios.get(
+        `http://localhost:5001/Indivucomments/${id}`,
+        { withCredentials: true }
+      );
+      setRecommendations(commentsResponse.data);
 
       setQueryDetails((prev) => ({
         ...prev,
         recommendationCount: prev.recommendationCount + 1,
       }));
       setFormState({
-        recommendationTitle: '',
-        recommendedProductName: '',
-        recommendedProductImage: '',
-        recommendationReason: '',
+        recommendationTitle: "",
+        recommendedProductName: "",
+        recommendedProductImage: "",
+        recommendationReason: "",
       });
     } catch (err) {
-      console.error('Error submitting recommendation:', err);
+      console.error("Error submitting recommendation:", err);
     }
   };
 
@@ -87,20 +98,42 @@ const QueDetails = () => {
       {queryDetails ? (
         <div className="p-4 border rounded-lg shadow-sm bg-white">
           <h2 className="text-xl font-bold">{queryDetails.queryTitle}</h2>
-          <p><strong>Product Name:</strong> {queryDetails.productName}</p>
-          <p><strong>Product Brand:</strong> {queryDetails.productBrand}</p>
-          <p><strong>Reason:</strong> {queryDetails.boycottingReasonDetails}</p>
-          <p><strong>User Name:</strong> {queryDetails.userName}</p>
-          <p><strong>User Email:</strong> {queryDetails.userEmail}</p>
-          <p><strong>Posted On:</strong> {new Date(queryDetails.createdAt).toLocaleString()}</p>
-          <p><strong>Recommendation Count:</strong> {queryDetails.recommendationCount}</p>
-          <img src={queryDetails.productImageUrl} alt={queryDetails.productName} className="mt-4 max-w-full h-auto" />
+          <p>
+            <strong>Product Name:</strong> {queryDetails.productName}
+          </p>
+          <p>
+            <strong>Product Brand:</strong> {queryDetails.productBrand}
+          </p>
+          <p>
+            <strong>Reason:</strong> {queryDetails.boycottingReasonDetails}
+          </p>
+          <p>
+            <strong>User Name:</strong> {queryDetails.userName}
+          </p>
+          <p>
+            <strong>User Email:</strong> {queryDetails.userEmail}
+          </p>
+          <p>
+            <strong>Posted On:</strong>{" "}
+            {new Date(queryDetails.createdAt).toLocaleString()}
+          </p>
+          <p>
+            <strong>Recommendation Count:</strong>{" "}
+            {queryDetails.recommendationCount}
+          </p>
+          <img
+            src={queryDetails.productImageUrl}
+            alt={queryDetails.productName}
+            className="mt-4 max-w-full h-auto"
+          />
 
           <div className="mt-6">
             <h3 className="text-lg font-bold">Add a Recommendation</h3>
             <form onSubmit={handleRecommendationSubmit} className="mb-4">
               <div className="mb-2">
-                <label className="block text-sm font-bold mb-1">Recommendation Title</label>
+                <label className="block text-sm font-bold mb-1">
+                  Recommendation Title
+                </label>
                 <input
                   type="text"
                   name="recommendationTitle"
@@ -111,7 +144,9 @@ const QueDetails = () => {
                 />
               </div>
               <div className="mb-2">
-                <label className="block text-sm font-bold mb-1">Recommended Product Name</label>
+                <label className="block text-sm font-bold mb-1">
+                  Recommended Product Name
+                </label>
                 <input
                   type="text"
                   name="recommendedProductName"
@@ -122,7 +157,9 @@ const QueDetails = () => {
                 />
               </div>
               <div className="mb-2">
-                <label className="block text-sm font-bold mb-1">Recommended Product Image</label>
+                <label className="block text-sm font-bold mb-1">
+                  Recommended Product Image
+                </label>
                 <input
                   type="text"
                   name="recommendedProductImage"
@@ -132,7 +169,9 @@ const QueDetails = () => {
                 />
               </div>
               <div className="mb-2">
-                <label className="block text-sm font-bold mb-1">Recommendation Reason</label>
+                <label className="block text-sm font-bold mb-1">
+                  Recommendation Reason
+                </label>
                 <textarea
                   name="recommendationReason"
                   value={formState.recommendationReason}
@@ -141,24 +180,34 @@ const QueDetails = () => {
                   required
                 />
               </div>
-              <button type="submit" className="btn btn-primary">Add Recommendation</button>
+              <button type="submit" className="btn bg-pink-200">
+                Add Recommendation
+              </button>
             </form>
           </div>
 
-          <div className="mt-6">
+          <div className="mt-6 ">
             <h3 className="text-lg font-bold">Recommendations</h3>
-            <div className="space-y-2">
+            <div className="space-y-2 ">
               {recommendations.length ? (
                 recommendations.map((rec) => (
-                  <div key={rec._id} className="p-2 border rounded-lg shadow-sm bg-gray-100">
-                    <h4 className="font-bold">{rec.recommendationTitle}</h4>
-                    <p><strong>Recommended Product:</strong> {rec.recommendedProductName}</p>
-                    {rec.recommendedProductImage && (
-                      <img src={rec.recommendedProductImage} alt={rec.recommendedProductName} className="mt-2 max-w-full h-auto" />
-                    )}
-                    <p>{rec.recommendationReason}</p>
-                    <small>Posted on: {new Date(rec.created_at).toLocaleString()}</small>
+                  <div key={rec._id} className="card bg-base-100  shadow-xl ">
+                  <div className="card-body flex flex-col">
+                    <div>
+                    <h2 className="card-title">{rec.recommendationTitle}</h2>
+                    </div>
+                    <p >
+                      <strong>Recommended Product:</strong> {`${rec.recommendedProductName}`}
+                    </p>
+                    <p >Reason : {`${rec.recommendationReason}`}</p>
                   </div>
+                  <small className="pl-6">Posted on: {new Date(rec.created_at).toLocaleString()}</small>
+                  <figure>
+                    {rec.recommendedProductImage && (
+                      <img src={rec.recommendedProductImage} />
+                    )}
+                  </figure>
+                </div>
                 ))
               ) : (
                 <p>No recommendations found.</p>
@@ -169,9 +218,9 @@ const QueDetails = () => {
       ) : (
         <p>No query details found.</p>
       )}
+
     </div>
   );
 };
 
 export default QueDetails;
-

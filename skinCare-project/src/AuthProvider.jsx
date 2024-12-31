@@ -19,17 +19,17 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const notify = (message = 'Success!') => toast.success(message, {
+  const notify = (message = 'Success!') => toast.success('success!', {
     position: "top-center",
     autoClose: 5000,
     hideProgressBar: false,
-    closeOnClick: true,
+    closeOnClick: false,
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
     theme: "light",
     transition: Bounce,
-  });
+    });
 
   const notifyError = (message = 'Error!') => toast.error(message, {
     position: "top-center",
@@ -47,14 +47,20 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password)
       .catch(error => notifyError(error.message))
-      .finally(() => setLoading(false));
+      .finally(() => {
+        setLoading(false)
+        alert("Signed up !")
+      });
   };
 
   const userLogin = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password)
-      .catch(error => notifyError(error.message))
-      .finally(() => setLoading(false));
+      .catch(error => alert(error.message))
+      .finally(() => {
+        setLoading(false)
+        alert("Logged in !")
+      });
   };
 
   const logOut = () => {
@@ -63,7 +69,7 @@ const AuthProvider = ({ children }) => {
     }
     setLoading(true);
     return signOut(auth)
-      .then(() => notifyError('Logged out'))
+      .then(() => alert('Logged out'))
       .catch(error => notifyError(error.message))
       .finally(() => setLoading(false));
   };
@@ -74,10 +80,10 @@ const AuthProvider = ({ children }) => {
     signInWithPopup(auth, googleProvider)
       .then(result => {
         setUser(result.user);
-        notify();
+        alert("Google login Successful");
       })
       .catch(error => {
-        notifyError('Google sign-in failed');
+        alert('Google sign-in failed');
         setUser(null);
       })
       .finally(() => setLoading(false));
@@ -86,7 +92,7 @@ const AuthProvider = ({ children }) => {
   const updateUserProfile = (profile) => {
     setLoading(true);
     return updateProfile(auth.currentUser, profile)
-      .then(() => notify('Profile updated!'))
+      .then(() => alert('Profile updated!'))
       .catch(error => notifyError(error.message))
       .finally(() => setLoading(false));
   };

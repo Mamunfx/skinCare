@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import { AuthContext } from './../AuthProvider';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 
@@ -14,7 +15,7 @@ const Myque = () => {
   useEffect(() => {
     const fetchQueries = async () => {
       try {
-        const response = await axiosInstance.get(`/myqueries/${userEmail}`,{withCredentials:true})
+        const response = await axiosInstance.get(`/myqueries/${userEmail}`, {withCredentials:true});
         const sortedQueries = response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         setQueries(sortedQueries);
       } catch (error) {
@@ -26,12 +27,34 @@ const Myque = () => {
   }, [userEmail]);
 
   const handleDelete = async (id) => {
-    try {
-      await axios.delete(`http://localhost:5001/queries/${id}`,{withCredentials:true});
-      setQueries((prevQueries) => prevQueries.filter((query) => query._id !== id));
-    } catch (error) {
-      console.error('Error deleting query:', error);
-    }
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axios.delete(`http://localhost:5001/queries/${id}`, {withCredentials:true});
+          setQueries((prevQueries) => prevQueries.filter((query) => query._id !== id));
+          Swal.fire(
+            'Deleted!',
+            'Your query has been deleted.',
+            'success'
+          );
+        } catch (error) {
+          console.error('Error deleting query:', error);
+          Swal.fire(
+            'Error!',
+            'There was a problem deleting your query.',
+            'error'
+          );
+        }
+      }
+    });
   };
 
   return (
@@ -50,30 +73,46 @@ const Myque = () => {
               quasi. In deleniti eaque aut repudiandae et a id nisi.
             </p>
             
-            <button className="btn btn-primary">
+            <button className="btn bg-pink-200">
               <Link to="/AddQue">Add a query</Link>
             </button>
           </div>
         </div>
       </div> 
       
-      <div className="container mx-auto py-6 ">
+      <div className="container mx-auto py-6  ">
         <h2 className="text-3xl font-bold text-center mb-6">My Queries</h2>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
           {queries.map((query) => (
-            <div key={query._id} className="p-4 border rounded-lg shadow-sm bg-white">
-              <h3 className="text-xl font-bold">{query.queryTitle}</h3>
-              <p><strong>Product Name:</strong> {query.productName}</p>
-              <p><strong>Product Brand:</strong> {query.productBrand}</p>
-              <p><strong>Reason:</strong> {query.boycottingReasonDetails}</p>
-              <p><strong>Posted on:</strong> {new Date(query.createdAt).toLocaleString()}</p>
-              <img src={query.productImageUrl} alt={query.productName} className="mt-4 max-w-full h-32" />
-              <div className="flex space-x-2">
-                <Link className="btn" to={`/QueDetails/${query._id}`}>View Details</Link>
-                <Link className="btn" to={`/UpdateQue/${query._id}`}>Update</Link>
-                <button className="btn btn-danger" onClick={() => handleDelete(query._id)}>Delete</button>
+           <div key={query._id}  className="card bg-base-100  shadow-xl">
+           <figure className="px-10 pt-10">
+             <img
+               src={query.productImageUrl}
+               className="rounded-xl h-48 w-full"
+             />
+           </figure>
+           <div className="card-body items-center text-center">
+           <h2 className="card-title">{query.queryTitle}</h2>
+                 <p>
+                   <strong>Product Name:</strong> {query.productName}
+                 </p>
+                 <p>
+                   <strong>Product Brand:</strong> {query.productBrand}
+                 </p>
+                 <p>
+                   <strong>Reason:</strong> {query.boycottingReasonDetails}
+                 </p>
+                 <p>
+                   <strong>Posted on:</strong>{" "}
+                   {new Date(query.createdAt).toLocaleString()}
+                 </p>
+             <div className="flex space-x-2">
+                <Link className="btn bg-pink-200" to={`/QueDetails/${query._id}`}>View Details</Link>
+                <Link className="btn bg-pink-200" to={`/UpdateQue/${query._id}`}>Update</Link>
+                <button className="btn btn-danger bg-pink-200" onClick={() => handleDelete(query._id)}>Delete</button>
               </div>
-            </div>
+           </div>
+         </div>
           ))}
           {queries.length === 0 && <p className="text-center text-gray-500">No queries found.</p>}
         </div>

@@ -61,7 +61,6 @@ const AllQue = () => {
     <div className='space-y-6'>
       <div className="container mx-auto py-6">
         <h2 className="text-3xl font-bold text-center mb-6">All Queries</h2>
-
         <div className="mb-4">
           <label className="block text-sm font-bold mb-2">Search by Product Name:</label>
           <div className="flex">
@@ -74,7 +73,7 @@ const AllQue = () => {
             />
             <button 
               onClick={handleSearch} 
-              className="btn btn-primary ml-2"
+              className="btn ml-2 bg-pink-200 "
             >
               Search
             </button>
@@ -100,7 +99,7 @@ const AllQue = () => {
            <figure className="px-10 pt-10">
              <img
                src={query.productImageUrl}
-               className="rounded-xl"
+               className="rounded-xl h-48 w-full"
              />
            </figure>
            <div className="card-body items-center text-center">
@@ -118,9 +117,12 @@ const AllQue = () => {
                    <strong>Posted on:</strong>{" "}
                    {new Date(query.createdAt).toLocaleString()}
                  </p>
-                 <Link className="btn" to={`/QueDetails/${query._id}`}>
+                 <div className='flex gap-2'>
+                 <button className='rounded-md px-2 bg-pink-200'>Recommendation Count : {query.recommendationCount}</button>
+                 <Link className="btn bg-pink-200 " to={`/QueDetails/${query._id}`}>
                    View Details
                  </Link>
+                 </div>
            </div>
          </div>
         ))}

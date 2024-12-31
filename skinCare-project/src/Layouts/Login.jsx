@@ -41,9 +41,9 @@ const Login = () => {
         loading? 
         <LoadingState></LoadingState>
         :
-        <div className="hero bg-blue-600 min-h-fit rounded-lg py-24">
+        <div className="hero bg-pink-50 min-h-fit rounded-lg py-24">
         <div className="hero-content flex-col lg:flex-row-reverse gap-16">
-          <div className="text-center lg:text-left text-white">
+          <div className="text-center lg:text-left ">
             <h1 className="text-5xl font-bold">Sign in now!</h1>
             <p className="py-6 lg:w-3/4">
               Join and explore our hundreds of sports equipment! We ensure quality over quantity and make sure you get the right product for your need!
@@ -78,7 +78,7 @@ const Login = () => {
                 <label className="label">
                   <Link to="/Signup">
                     Don't have an account?
-                    <span className="text-blue-600 font-semibold"> Sign up</span>
+                    <span className="text-pink-300 font-semibold"> Sign up</span>
                   </Link>
                 </label>
               </div>
@@ -86,18 +86,16 @@ const Login = () => {
                 <p className="text-red-600 mb-4">{errorMessage}</p>
               )}
               <div className="form-control mt-6">
-                <button type="submit" className="btn text-white bg-blue-600">
+                <button type="submit" className="btn  bg-pink-200">
                   Sign In
                 </button>
               </div>
               <button
                   type="button"
-                  className="submit btn text-white bg-blue-600 w-full"
-                  onClick={() => handleGoogleSignIn()
-                    .then(() => {
+                  className="submit btn bg-pink-200 w-full"
+                  onClick={() => handleGoogleSignIn().then(() => {
                       navigate(from, { replace: true });
-                    })
-                    .catch((err) => {
+                    }).catch((err) => {
                       setErrorMessage(err.message);
                     })
                   }
