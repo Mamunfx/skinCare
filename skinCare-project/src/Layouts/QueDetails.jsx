@@ -127,8 +127,8 @@ const QueDetails = () => {
             className="mt-4 max-w-full h-auto"
           />
 
-          <div className="mt-6">
-            <h3 className="text-lg font-bold">Add a Recommendation</h3>
+          <div className="mt-6 border-t-2">
+            <h3 className="text-2xl font-bold mb-8">Add a Recommendation : </h3>
             <form onSubmit={handleRecommendationSubmit} className="mb-4">
               <div className="mb-2">
                 <label className="block text-sm font-bold mb-1">
@@ -186,15 +186,15 @@ const QueDetails = () => {
             </form>
           </div>
 
-          <div className="mt-6 ">
-            <h3 className="text-lg font-bold">Recommendations</h3>
+          <div className="mt-6 border-t-2">
+            <h3 className="text-2xl font-bold">Recommendations : </h3>
             <div className="space-y-2 ">
               {recommendations.length ? (
                 recommendations.map((rec) => (
                   <div key={rec._id} className="card bg-base-100  shadow-xl ">
                   <div className="card-body flex flex-col">
                     <div>
-                    <h2 className="card-title">{rec.recommendationTitle}</h2>
+                    <h2 className="card-title"># {rec.recommendationTitle}</h2>
                     </div>
                     <p >
                       <strong>Recommended Product:</strong> {`${rec.recommendedProductName}`}

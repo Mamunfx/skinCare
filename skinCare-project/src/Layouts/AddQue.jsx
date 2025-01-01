@@ -35,8 +35,7 @@ const AddQue = () => {
       const response = await axios.post('http://localhost:5001/queries', queryData,{
         withCredentials:true
       });
-      console.log('Query added:', response.data);
-      // Optionally reset the form
+
       setFormData({
         productName: '',
         productBrand: '',
@@ -44,6 +43,7 @@ const AddQue = () => {
         queryTitle: '',
         boycottingReasonDetails: ''
       });
+      alert("Added")
     } catch (error) {
       console.error('Error adding query:', error);
     }
@@ -103,13 +103,13 @@ const AddQue = () => {
           name="boycottingReasonDetails"
           value={formData.boycottingReasonDetails}
           onChange={handleChange}
-          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-300"
           
         />
       </div>
       <button
         type="submit"
-        className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full bg-pink-300  py-2 px-4 rounded-lg hover:bg-pink-500 focus:outline-none focus:ring-2 focus:ring-pink-300"
       >
         Add Query
       </button>

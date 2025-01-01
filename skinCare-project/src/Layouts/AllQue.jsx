@@ -58,30 +58,34 @@ const AllQue = () => {
   };
 
   return (
-    <div className='space-y-6'>
+    <div className="space-y-6">
       <div className="container mx-auto py-6">
         <h2 className="text-3xl font-bold text-center mb-6">All Queries</h2>
+
+        <div className='flex flex-col lg:flex-row justify-between'>
+
         <div className="mb-4">
-          <label className="block text-sm font-bold mb-2">Search by Product Name:</label>
+          <label className="block text-sm font-bold mb-2">
+            Search by Product Name:
+          </label>
           <div className="flex">
             <input
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="p-2 border rounded-lg flex-grow"
-              placeholder="Enter product name"
+              placeholder="Enter exact product name"
             />
-            <button 
-              onClick={handleSearch} 
-              className="btn ml-2 bg-pink-200 "
-            >
+            <button onClick={handleSearch} className="btn ml-2 bg-pink-200 ">
               Search
             </button>
           </div>
         </div>
 
         <div className="mb-4">
-          <label className="block text-sm font-bold mb-2">Select Grid Layout:</label>
+          <label className="block text-sm font-bold mb-2">
+            Select Grid Layout
+          </label>
           <select
             value={GridLayoutNumber}
             onChange={handleGridLayoutChange}
@@ -92,42 +96,58 @@ const AllQue = () => {
             <option value={3}>3 Columns</option>
           </select>
         </div>
+        </div>
 
-      <div className={`default-classname ${getGridColsClass(GridLayoutNumber)}`}>
-        {filteredQueries.map(query => (
-           <div className="card bg-base-100  shadow-xl">
-           <figure className="px-10 pt-10">
-             <img
-               src={query.productImageUrl}
-               className="rounded-xl h-48 w-full"
-             />
-           </figure>
-           <div className="card-body items-center text-center">
-           <h2 className="card-title">{query.queryTitle}</h2>
-                 <p>
-                   <strong>Product Name:</strong> {query.productName}
-                 </p>
-                 <p>
-                   <strong>Product Brand:</strong> {query.productBrand}
-                 </p>
-                 <p>
-                   <strong>Reason:</strong> {query.boycottingReasonDetails}
-                 </p>
-                 <p>
-                   <strong>Posted on:</strong>{" "}
-                   {new Date(query.createdAt).toLocaleString()}
-                 </p>
-                 <div className='flex gap-2'>
-                 <button className='rounded-md px-2 bg-pink-200'>Recommendation Count : {query.recommendationCount}</button>
-                 <Link className="btn bg-pink-200 " to={`/QueDetails/${query._id}`}>
-                   View Details
-                 </Link>
-                 </div>
-           </div>
-         </div>
-        ))}
-        {filteredQueries.length === 0 && <p className="text-center text-gray-500">No queries found.</p>}
-      </div> 
+        <div
+          className={`default-classname ${getGridColsClass(GridLayoutNumber)}`}
+        >
+          {filteredQueries.map((query) => (
+            <div className="card bg-base-100  shadow-xl">
+              <figure className="px-10 pt-10">
+                <img
+                  src={query.productImageUrl}
+                  className="rounded-xl h-48 w-full"
+                />
+              </figure>
+              <div className="card-body items-center text-center">
+                <h2 className="card-title">{query.queryTitle}</h2>
+                <p>
+                  <strong>Product Name:</strong> {query.productName}
+                </p>
+                <p>
+                  <strong>Product Brand:</strong> {query.productBrand}
+                </p>
+                <p>
+                  <strong>Reason:</strong> {query.boycottingReasonDetails}
+                </p>
+                <p>
+                  <strong>Posted on:</strong>{" "}
+                  {new Date(query.createdAt).toLocaleString()}
+                </p>
+                <div className="flex gap-2">
+                  
+
+                  <div className="indicator">
+                    <span className="indicator-item badge badge-secondary ">
+                    {query.recommendationCount}
+                    </span>
+                    <button className="rounded-md px-2 bg-pink-200">Recommendation Count</button>
+                  </div>
+
+                  <Link
+                    className="btn bg-pink-200 "
+                    to={`/QueDetails/${query._id}`}
+                  >
+                    View Details
+                  </Link>
+                </div>
+              </div>
+            </div>
+          ))}
+          {filteredQueries.length === 0 && (
+            <p className="text-center text-gray-500">No queries found.</p>
+          )}
+        </div>
       </div>
     </div>
   );

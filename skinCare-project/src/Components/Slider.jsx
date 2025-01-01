@@ -1,35 +1,114 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Slider = () => {
     return (
         <div>
-           <div className="carousel w-full">
-  <div id="item1" className="carousel-item w-full">
-    <img
-      src="https://img.daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.webp"
-      className="w-full" />
+           <div className="carousel w-full rounded-lg">
+  <div id="slide1" className="carousel-item relative w-full">
+    <div className="hero  dark:bg-gray-900 h-fit py-16">
+      <div className="hero-content flex flex-col lg:flex-row-reverse gap-8 p-4">
+        <div className="w-full lg:w-1/2">
+          <img
+            
+            src="https://i.ibb.co.com/f4GTXZW/16348288-Woman-with-magnifier-analyzing-question-marks-1.jpg"
+            className="rounded-lg shadow-2xl w-full h-96 object-cover"
+            alt="Product Analysis"
+          />
+        </div>
+        <div className="w-full lg:w-1/2 text-center lg:text-left space-y-4">
+          <h1 className="text-lg text-pink-300">Explore Product Alternatives</h1>
+          <h1 className="text-3xl lg:text-5xl font-bold mt-4 lg:mt-0">
+            Find Your Ideal Product
+          </h1>
+          <p className="py-4 lg:py-6 ">
+            Discover detailed recommendations and alternatives for the products you query about. Make informed decisions based on comprehensive insights and user recommendations.
+          </p>
+          <div className="flex justify-center lg:justify-start gap-4">
+            <Link to="/Queries" className="btn bg-pink-300 ">View Queries</Link>
+            <Link to="/Myque" className="btn  bg-pink-300">Learn More</Link>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div className="absolute left-5 right-5 bottom-36 flex -translate-y-1/2 transform justify-between">
+      <a href="#slide3" className="btn btn-circle">
+        ❮
+      </a>
+      <a href="#slide2" className="btn btn-circle">
+        ❯
+      </a>
+    </div>
   </div>
-  <div id="item2" className="carousel-item w-full">
-    <img
-      src="https://img.daisyui.com/images/stock/photo-1609621838510-5ad474b7d25d.webp"
-      className="w-full" />
+
+  <div id="slide2" className="carousel-item relative w-full">
+    <div className="hero dark:bg-gray-900 h-fit py-16">
+      <div className="hero-content flex flex-col lg:flex-row-reverse gap-8 p-4">
+        <div className="w-full lg:w-1/2">
+          <img
+            src="https://i.ibb.co.com/LtPFVrT/22445014-2112-w037-n003-68-B-p1-68-1.jpg"
+            className="rounded-lg shadow-2xl w-full h-96 object-cover"
+            alt="User Recommendations"
+          />
+        </div>
+        <div className="w-full lg:w-1/2 text-center lg:text-left space-y-2">
+          <h1 className="text-lg text-pink-300">User Insights</h1>
+          <h1 className="text-3xl lg:text-5xl font-bold mt-4 lg:mt-0">
+            Trusted Recommendations
+          </h1>
+          <p className="py-4 lg:py-6">
+            Get insights from other users' recommendations to find the best products for your needs. Share your own experiences and help others make informed choices.
+          </p>
+          <div className="flex justify-center lg:justify-start gap-4">
+            <Link to="/Queries" className="btn bg-pink-300 ">View Recommendations</Link>
+            <Link to="/Myque" className="btn bg-pink-300">Learn More</Link>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div className="absolute left-5 right-5 bottom-36 flex -translate-y-1/2 transform justify-between">
+      <a href="#slide1" className="btn btn-circle">
+        ❮
+      </a>
+      <a href="#slide3" className="btn btn-circle">
+        ❯
+      </a>
+    </div>
   </div>
-  <div id="item3" className="carousel-item w-full">
-    <img
-      src="https://img.daisyui.com/images/stock/photo-1414694762283-acccc27bca85.webp"
-      className="w-full" />
+
+  <div id="slide3" className="carousel-item relative w-full">
+    <div className="hero  dark:bg-gray-900 h-fit py-16">
+      <div className="hero-content flex flex-col lg:flex-row-reverse gap-8 p-4">
+        <div className="w-full lg:w-1/2">
+          <img
+            src="https://i.ibb.co.com/2Y89KHN/11667041-20943401-1.jpg"
+            className="rounded-lg shadow-2xl w-full h-96 object-cover"
+            alt="Expert Advice"
+          />
+        </div>
+        <div className="w-full lg:w-1/2 text-center lg:text-left space-y-2">
+          <h1 className="text-lg text-pink-300">Expert Guidance</h1>
+          <h1 className="text-3xl lg:text-5xl font-bold mt-4 lg:mt-0">
+            Make Informed Choices
+          </h1>
+          <p className="py-4 lg:py-6 ">
+            Our platform provides expert advice and detailed analysis to help you choose the right products. Get personalized recommendations based on your needs.
+          </p>
+          <div className="flex justify-center lg:justify-start gap-4">
+            <Link to="/AddQue" className="btn bg-pink-300 ">Get Expert Advice</Link>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div className="absolute left-5 right-5 bottom-36 flex -translate-y-1/2 transform justify-between">
+      <a href="#slide2" className="btn btn-circle ">
+        ❮
+      </a>
+      <a href="#slide1" className="btn btn-circle">
+        ❯
+      </a>
+    </div>
   </div>
-  <div id="item4" className="carousel-item w-full">
-    <img
-      src="https://img.daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.webp"
-      className="w-full" />
-  </div>
-</div>
-<div className="flex w-full justify-center gap-2 py-2">
-  <a href="#item1" className="btn btn-xs">1</a>
-  <a href="#item2" className="btn btn-xs">2</a>
-  <a href="#item3" className="btn btn-xs">3</a>
-  <a href="#item4" className="btn btn-xs">4</a>
 </div>
 
         </div>

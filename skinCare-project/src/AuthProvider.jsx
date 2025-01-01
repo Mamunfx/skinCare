@@ -75,19 +75,20 @@ const AuthProvider = ({ children }) => {
   };
 
   const googleProvider = new GoogleAuthProvider();
-  const handleGoogleSignIn = () => {
-    setLoading(true);
-    signInWithPopup(auth, googleProvider)
-      .then(result => {
-        setUser(result.user);
-        alert("Google login Successful");
-      })
-      .catch(error => {
-        alert('Google sign-in failed');
-        setUser(null);
-      })
-      .finally(() => setLoading(false));
-  };
+const handleGoogleSignIn = () => {
+  setLoading(true);
+  return signInWithPopup(auth, googleProvider)
+    .then(result => {
+      setUser(result.user);
+      alert("Google login Successful");
+    })
+    .catch(error => {
+      alert('Google sign-in failed');
+      setUser(null);
+    })
+    .finally(() => setLoading(false));
+};
+
 
   const updateUserProfile = (profile) => {
     setLoading(true);

@@ -117,7 +117,7 @@ const UpdateQue = () => {
               required
             />
           </div>
-          <button type="submit" className="btn btn-primary">Update Query</button>
+          <button type="submit" className="btn bg-pink-200">Update Query</button>
         </form>
       ) : (
         <p>Query details not found.</p>

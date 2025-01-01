@@ -69,9 +69,9 @@ const MyReco = () => {
       <h1 className="text-3xl font-bold mb-4">My Recommendations</h1>
       {recommendations.length > 0 ? (
         <div className="overflow-x-auto">
-          <table className="table">
-            <thead>
-              <tr>
+          <table className="table ">
+            <thead className='bg-pink-200 text-black text-sm'>
+              <tr >
                 <th className="py-2 px-4 border-b">Title</th>
                 <th className="py-2 px-4 border-b">Product Name</th>
                 <th className="py-2 px-4 border-b">Reason</th>

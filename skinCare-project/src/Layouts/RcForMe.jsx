@@ -66,8 +66,8 @@ const RcForMe = () => {
       {recommendations.length > 0 ? (
        <div className="overflow-x-auto">
        <table className="table">
-         {/* head */}
-         <tr>
+         
+         <tr className='bg-pink-200 '>
                      <th className="py-2 px-4 border-b">Title</th>
                      <th className="py-2 px-4 border-b">Product Name</th>
                      <th className="py-2 px-4 border-b">Reason</th>
