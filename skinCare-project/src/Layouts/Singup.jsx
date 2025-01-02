@@ -44,9 +44,7 @@ const Signup = () => {
               <div className="text-center lg:text-left ">
                 <h1 className="text-5xl font-bold">Sign up now!</h1>
                 <p className="py-6 lg:w-3/4">
-                  Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-                  excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-                  et a id nisi.
+                Join and explore our hundreds of query about thousands of products! We ensure you the best buying suggestion  and make sure you get the right product for your need!
                 </p>
               </div>
               <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">

@@ -78,11 +78,11 @@ const Navbar = () => {
             {user.displayName} 
             </div> 
             </div>
-        <Link  className='btn bg-pink-200' onClick={logOut}>Sing out</Link>
+        <Link  className='btn bg-pink-200' onClick={logOut}>Sign out</Link>
       </div>
       :
       <div className='flex gap-1'>
-        <Link to="/login" className='btn  bg-pink-200 '>Sing in</Link>
+        <Link to="/login" className='btn  bg-pink-200 '>Sign in</Link>
       </div>
     }
   
