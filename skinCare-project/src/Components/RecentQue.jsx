@@ -8,7 +8,7 @@ const RecentQue = () => {
   useEffect(() => {
     const fetchRecentQueries = async () => {
       try {
-        const response = await axios.get('http://localhost:5001/queries',{
+        const response = await axios.get('https://a11-server-tau.vercel.app/queries',{
           withCredentials:true
         });
         const sortedQueries = response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));

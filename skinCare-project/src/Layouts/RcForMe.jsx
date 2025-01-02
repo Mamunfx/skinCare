@@ -14,10 +14,10 @@ const RcForMe = () => {
   useEffect(() => {
     const fetchQueries = async () => {
       try {
-        const response = await axios.get(`http://localhost:5001/myqueries/${userEmail}`,{
+        const response = await axios.get(`https://a11-server-tau.vercel.app/myqueries/${userEmail}`,{
           withCredentials:true
         });
-        setQueries(response.data);
+        setQueries(response?.data);
       } catch (error) {
         console.error('Error fetching queries:', error);
       }
@@ -33,7 +33,7 @@ const RcForMe = () => {
       try {
         const allRecommendations = await Promise.all(
           queries.map(async (query) => {
-            const response = await axios.get(`http://localhost:5001/Indivucomments/${query._id}`,{withCredentials:true});
+            const response = await axios.get(`https://a11-server-tau.vercel.app/Indivucomments/${query._id}`,{withCredentials:true});
             return response.data;
           })
         );
@@ -49,10 +49,6 @@ const RcForMe = () => {
       fetchRecommendations();
     }
   }, [queries]);
-
-  if (loading) {
-    return <LoadingState />;
-  }
 
   if (error) {
     return <div>{error}</div>;

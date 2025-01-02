@@ -22,12 +22,12 @@ const QueDetails = () => {
     const fetchQueryDetails = async () => {
       try {
         const queryResponse = await axios.get(
-          `http://localhost:5001/queries/${id}`
+          `https://a11-server-tau.vercel.app/queries/${id}`
         );
         setQueryDetails(queryResponse.data);
 
         const commentsResponse = await axios.get(
-          `http://localhost:5001/Indivucomments/${id}`
+          `https://a11-server-tau.vercel.app/Indivucomments/${id}`
         );
         setRecommendations(commentsResponse.data);
       } catch (err) {
@@ -61,14 +61,14 @@ const QueDetails = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5001/comments",
+        "https://a11-server-tau.vercel.app/comments",
         newRecommendation,
         { withCredentials: true }
       );
       const newComment = response.data;
 
       const commentsResponse = await axios.get(
-        `http://localhost:5001/Indivucomments/${id}`,
+        `https://a11-server-tau.vercel.app/Indivucomments/${id}`,
         { withCredentials: true }
       );
       setRecommendations(commentsResponse.data);

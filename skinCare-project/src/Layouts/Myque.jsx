@@ -38,7 +38,7 @@ const Myque = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(`http://localhost:5001/queries/${id}`, {withCredentials:true});
+          await axios.delete(`https://a11-server-tau.vercel.app/queries/${id}`, {withCredentials:true});
           setQueries((prevQueries) => prevQueries.filter((query) => query._id !== id));
           Swal.fire(
             'Deleted!',

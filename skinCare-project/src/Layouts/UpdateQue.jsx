@@ -22,7 +22,7 @@ const UpdateQue = () => {
   useEffect(() => {
     const fetchQueryDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:5001/queries/${id}`);
+        const response = await axios.get(`https://a11-server-tau.vercel.app/queries/${id}`);
         setQueryDetails(response.data);
         setFormState({
           productName: response.data.productName,
@@ -49,7 +49,7 @@ const UpdateQue = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5001/queries/${id}`, formState,{withCredentials:true});
+      await axios.put(`https://a11-server-tau.vercel.app/queries/${id}`, formState,{withCredentials:true});
       navigate('/Myque');
     } catch (error) {
       setError('Error updating query.');

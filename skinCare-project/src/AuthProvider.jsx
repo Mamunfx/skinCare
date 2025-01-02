@@ -19,7 +19,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const notify = (message = 'Success!') => toast.success('success!', {
+  const notify = (message = 'Success!') => toast.success(message, {
     position: "top-center",
     autoClose: 5000,
     hideProgressBar: false,
@@ -59,7 +59,7 @@ const AuthProvider = ({ children }) => {
       .catch(error => alert(error.message))
       .finally(() => {
         setLoading(false)
-        alert("Logged in !")
+        notify("Logged in !")
       });
   };
 
@@ -69,9 +69,11 @@ const AuthProvider = ({ children }) => {
     }
     setLoading(true);
     return signOut(auth)
-      .then(() => alert('Logged out'))
       .catch(error => notifyError(error.message))
-      .finally(() => setLoading(false));
+      .finally(() => {
+        setLoading(false)
+        notify('Logged out')
+      });
   };
 
   const googleProvider = new GoogleAuthProvider();
@@ -80,20 +82,23 @@ const handleGoogleSignIn = () => {
   return signInWithPopup(auth, googleProvider)
     .then(result => {
       setUser(result.user);
-      alert("Google login Successful");
+      
     })
     .catch(error => {
       alert('Google sign-in failed');
       setUser(null);
     })
-    .finally(() => setLoading(false));
+    .finally(() => {
+      setLoading(false)
+      notify("Google login Successful");
+    });
 };
 
 
   const updateUserProfile = (profile) => {
     setLoading(true);
     return updateProfile(auth.currentUser, profile)
-      .then(() => alert('Profile updated!'))
+      .then(() => notify('Profile updated!'))
       .catch(error => notifyError(error.message))
       .finally(() => setLoading(false));
   };
@@ -103,7 +108,7 @@ const handleGoogleSignIn = () => {
       
       if (currentUser?.email) {
         const user = {email: currentUser.email};
-        axios.post('http://localhost:5001/JWT',user,{
+        axios.post('https://a11-server-tau.vercel.app/JWT',user,{
           withCredentials:true
         })
         .then(res=> {
@@ -112,7 +117,7 @@ const handleGoogleSignIn = () => {
         })
       }
       else{
-        axios.post('http://localhost:5001/logout',{},{
+        axios.post('https://a11-server-tau.vercel.app/logout',{},{
           withCredentials:true
         })
         .then(res=>{

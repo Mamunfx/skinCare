@@ -32,7 +32,7 @@ const AddQue = () => {
     };
 
     try {
-      const response = await axios.post('http://localhost:5001/queries', queryData,{
+      const response = await axios.post('https://a11-server-tau.vercel.app/queries', queryData,{
         withCredentials:true
       });
 

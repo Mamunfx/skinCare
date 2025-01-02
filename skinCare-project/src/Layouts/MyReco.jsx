@@ -13,7 +13,7 @@ const MyReco = () => {
   useEffect(() => {
     const fetchUserRecommendations = async () => {
       try {
-        const response = await axios.get(`http://localhost:5001/Comments/${user.email}`, {withCredentials:true});
+        const response = await axios.get(`https://a11-server-tau.vercel.app/Comments/${user.email}`, {withCredentials:true});
         setRecommendations(response.data);
       } catch (error) {
         setError('Error fetching recommendations.');
@@ -37,7 +37,7 @@ const MyReco = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(`http://localhost:5001/comments/${id}`, {withCredentials:true});
+          await axios.delete(`https://a11-server-tau.vercel.app/comments/${id}`, {withCredentials:true});
           setRecommendations((prevRecommendations) => prevRecommendations.filter((rec) => rec._id !== id));
           Swal.fire(
             'Deleted!',
