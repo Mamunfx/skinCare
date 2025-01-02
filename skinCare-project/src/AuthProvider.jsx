@@ -82,7 +82,7 @@ const handleGoogleSignIn = () => {
   return signInWithPopup(auth, googleProvider)
     .then(result => {
       setUser(result.user);
-      
+      notify("Google login Successful");
     })
     .catch(error => {
       alert('Google sign-in failed');
@@ -90,7 +90,6 @@ const handleGoogleSignIn = () => {
     })
     .finally(() => {
       setLoading(false)
-      notify("Google login Successful");
     });
 };
 
@@ -112,7 +111,7 @@ const handleGoogleSignIn = () => {
           withCredentials:true
         })
         .then(res=> {
-          console.log('login token',res.data);
+          //console.log('login token',res.data);
           setLoading(false)
         })
       }
@@ -121,7 +120,7 @@ const handleGoogleSignIn = () => {
           withCredentials:true
         })
         .then(res=>{
-          console.log('logout',res.data);
+          //console.log('logout',res.data);
           setLoading(false)
         })
       }

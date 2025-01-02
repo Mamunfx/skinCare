@@ -21,7 +21,6 @@ const Login = () => {
     if (!user) {
       try {
         await userLogin(email, password);
-        notify('Logged In !');
         navigate(from, { replace: true });
       } catch (error) {
         notifyError(error.message);
