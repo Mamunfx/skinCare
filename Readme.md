@@ -7,7 +7,7 @@ Care is a recommendation giving website that provides personalized product sugge
 [Care Live Site](https://assignment11-f5403.web.app)
 
 ## Screenshot
-![Care Screenshot](https://via.placeholder.com/800x400.png?text=Care+Recommendation+Website)
+![Care Screenshot](https://i.ibb.co.com/bgx1wMrZ/Screenshot-2025-02-11-014359.png)
 
 ## Technologies Used
 - HTML5, CSS3, JavaScript
