@@ -7,7 +7,6 @@ import {
 import './index.css'
 import Home from './Layouts/Home';
 import Root from './Layouts/Root';
-
 import Login from './Layouts/Login';
 import Signup from './Layouts/Singup';
 import AuthProvider from './AuthProvider';
