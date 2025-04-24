@@ -4,7 +4,7 @@
 Care is a recommendation giving website that provides personalized product suggestions based on user profiles, preferences, and past interactions. It features advanced search and filtering, user-generated content, social sharing, and data-driven insights.
 
 ## Live Site Link
-[Care Live Site](https://assignment11-f5403.web.app)
+[Care Live Site]()
 
 ## Screenshot
 ![Care Screenshot](https://i.ibb.co.com/bgx1wMrZ/Screenshot-2025-02-11-014359.png)

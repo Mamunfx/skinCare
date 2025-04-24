@@ -37,7 +37,7 @@ const Myque = () => {
 
   const handleSort = (order) => {
     const sortedQueries = [...queries].sort((a, b) => {
-      return order === "desc"
+      return order === "nf"
         ? new Date(b.createdAt) - new Date(a.createdAt)
         : new Date(a.createdAt) - new Date(b.createdAt);
     });
@@ -106,6 +106,7 @@ const Myque = () => {
       <div className="container mx-auto py-6">
         <h2 className="text-3xl font-bold text-center mb-6">My Queries</h2>
 
+
         <div className="flex justify-end mb-6 relative">
           <div className="dropdown relative">
             <button
@@ -121,7 +122,7 @@ const Myque = () => {
                 <li>
                   <button
                     className="px-4 py-2 text-gray-700 hover:bg-pink-300 hover:text-white rounded-t-md w-full text-left transition duration-300"
-                    onClick={() => handleSort("desc")}
+                    onClick={() => handleSort("nf")}
                   >
                     Newest First
                   </button>
@@ -129,7 +130,7 @@ const Myque = () => {
                 <li>
                   <button
                     className="px-4 py-2 text-gray-700 hover:bg-pink-300 hover:text-white rounded-b-md w-full text-left transition duration-300"
-                    onClick={() => handleSort("asc")}
+                    onClick={() => handleSort("of")}
                   >
                     Oldest First
                   </button>

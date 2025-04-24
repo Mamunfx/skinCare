@@ -46,7 +46,7 @@ const Navbar = () => {
 
 
     <div>
-    <Link className="btn btn-ghost text-xl">
+    <Link className=" text-xl">
     <div className='flex  items-center '>
       <img src="https://i.ibb.co.com/xgb3fnn/Arsenal-removebg-preview.png" alt="" className='h-16'/>
       <h1 className='text-3xl'>Care</h1>
