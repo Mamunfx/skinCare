@@ -21,9 +21,9 @@ const Products = () => {
         fetchQueries();
       }, []);
     return (
-      <div className="flex flex-col lg:flex-row gap-4 bg-base-100 dark:bg-gray-900 shadow-2xl rounded-lg py-16 px-4">
+      <div className="flex flex-col  gap-4 bg-base-100 dark:bg-gray-900 shadow-2xl rounded-lg py-16 px-4 ">
         <div>
-          <h1 className="text-2xl font-semibold">
+          <h1 className="text-2xl lg:text-3xl font-semibold">
             Recently discussed product :{" "}
           </h1>
         </div>

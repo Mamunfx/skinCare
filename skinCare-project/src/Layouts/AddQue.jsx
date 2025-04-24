@@ -51,7 +51,9 @@ const AddQue = () => {
 
   return (
     <div className='space-y-6'>
-            
+            <div className='text-center my-16'>
+              <h1 className='text-4xl font-bold'>Add a query </h1>
+            </div>
       <form onSubmit={handleSubmit} className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md">
       <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2">Product Name:</label>

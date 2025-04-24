@@ -6,7 +6,7 @@ const Navbar = () => {
   
     return (
         <div>
-            <div  className="navbar bg-pink-50 rounded-lg py-1 fixed top-0 left-0 right-0 z-50">
+            <div  className="navbar bg-pink-50 rounded-lg py-1 fixed top-0 left-0 right-0 z-50 ">
   <div className="navbar-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -47,7 +47,7 @@ const Navbar = () => {
 
     <div>
     <Link className="btn btn-ghost text-xl">
-    <div className='flex  items-center'>
+    <div className='flex  items-center '>
       <img src="https://i.ibb.co.com/xgb3fnn/Arsenal-removebg-preview.png" alt="" className='h-16'/>
       <h1 className='text-3xl'>Care</h1>
       </div>

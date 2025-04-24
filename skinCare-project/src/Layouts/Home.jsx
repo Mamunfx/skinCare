@@ -2,16 +2,19 @@ import React from 'react';
 import Slider from './../Components/Slider';
 import RecentQue from '../Components/RecentQue';
 import Products from '../Components/Products';
+import NewSection from './../Components/NewSection';
 
 const Home = () => {
     const handleGetTouch=e=>{
         e.preventDefault();
       }
     return (
-      <div className="w-11/12 mx-auto my-8 space-y-8">
+      <div className="w-11/12 mx-auto my-4 space-y-8">
         <Slider></Slider>
         <RecentQue></RecentQue>
         <Products></Products>
+
+        <NewSection></NewSection>
 
         <div>
           <div className="bg-base-100 dark:bg-gray-900 shadow-2xl rounded-lg py-16">

@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import LoadingState from './../Components/LoadingState';
 
 const AllQue = () => {
   const [GridLayoutNumber, setGridLayoutNumber] = useState(null);
   const [queries, setQueries] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredQueries, setFilteredQueries] = useState([]);
+  const [loading,setLoading]=useState(true)
 
   useEffect(() => {
     const fetchQueries = async () => {
@@ -17,6 +19,7 @@ const AllQue = () => {
         const sortedQueries = response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         setQueries(sortedQueries);
         setFilteredQueries(sortedQueries);
+        setLoading(false)
       } catch (error) {
         console.error('Error fetching queries:', error);
       }
@@ -98,56 +101,67 @@ const AllQue = () => {
         </div>
         </div>
 
-        <div
+        {
+          loading? <LoadingState></LoadingState> :
+          <div
           className={`default-classname ${getGridColsClass(GridLayoutNumber)}`}
         >
           {filteredQueries.map((query) => (
-            <div className="card bg-base-100  shadow-xl">
-              <figure className="px-10 pt-10">
-                <img
-                  src={query.productImageUrl}
-                  className="rounded-xl h-48 w-full"
-                />
-              </figure>
-              <div className="card-body items-center text-center">
-                <h2 className="card-title">{query.queryTitle}</h2>
+            <div className="card bg-base-100 shadow-xl rounded-lg">
+            <figure className="px-8 pt-8">
+              <img
+                src={query.productImageUrl}
+                alt={query.productName}
+                className="rounded-lg h-48 w-full object-scale-down"
+              />
+            </figure>
+            <div className="card-body">
+              <h2 className="card-title text-xl text-center font-semibold mb-4">
+                {query.queryTitle}
+              </h2>
+              <div className="space-y-2">
                 <p>
-                  <strong>Product Name:</strong> {query.productName}
+                  <span className="font-medium text-gray-700">Product Name:</span>{" "}
+                  {query.productName}
                 </p>
                 <p>
-                  <strong>Product Brand:</strong> {query.productBrand}
+                  <span className="font-medium text-gray-700">Product Brand:</span>{" "}
+                  {query.productBrand}
                 </p>
                 <p>
-                  <strong>Reason:</strong> {query.boycottingReasonDetails}
+                  <span className="font-medium text-gray-700">Reason:</span>{" "}
+                  {query.boycottingReasonDetails}
                 </p>
                 <p>
-                  <strong>Posted on:</strong>{" "}
+                  <span className="font-medium text-gray-700">Posted on:</span>{" "}
                   {new Date(query.createdAt).toLocaleString()}
                 </p>
-                <div className="flex gap-2">
-                  
-
-                  <div className="indicator">
-                    <span className="indicator-item badge badge-secondary ">
+              </div>
+              <div className="flex justify-left lg:justify-center mt-4">
+                <div className="indicator">
+                  <span className="indicator-item badge badge-secondary">
                     {query.recommendationCount}
-                    </span>
-                    <button className="rounded-md px-2 bg-pink-200">Recommendation Count</button>
-                  </div>
-
-                  <Link
-                    className="btn bg-pink-200 "
-                    to={`/QueDetails/${query._id}`}
-                  >
-                    View Details
-                  </Link>
+                  </span>
+                  <button className="rounded-md px-2  bg-pink-300">
+                    Recommendation Count
+                  </button>
                 </div>
+                <Link
+                  className="btn btn-outline border-2 border-pink-300 px-6 py-2 rounded-md ml-2"
+                  to={`/QueDetails/${query._id}`}
+                >
+                  View Details
+                </Link>
               </div>
             </div>
+          </div>
+          
           ))}
           {filteredQueries.length === 0 && (
             <p className="text-center text-gray-500">No queries found.</p>
           )}
         </div>
+        }
       </div>
     </div>
   );

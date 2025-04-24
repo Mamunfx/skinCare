@@ -29,49 +29,67 @@ const RecentQue = () => {
     <div className="container mx-auto py-6">
       <h2 className="text-4xl font-bold text-center mb-6">Recent Queries</h2>
 
-      {
-        loading ? 
-        <LoadingState></LoadingState>:
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-2">
+      {loading ? (
+        <LoadingState></LoadingState>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-4 space-y-8">
+          {queries.map((query) => (
 
-        {queries.map((query) => (
-              
-              <div className="card bg-base-100  shadow-xl">
-             <figure className="px-10 pt-10">
-               <img
-                 src={query.productImageUrl}
-                 className="rounded-xl h-48 w-full"
-               />
-             </figure>
-             <div className="card-body items-center text-center">
-             <h2 className="card-title">{query.queryTitle}</h2>
-                   <p>
-                     <strong>Product Name:</strong> {query.productName}
-                   </p>
-                   <p>
-                     <strong>Product Brand:</strong> {query.productBrand}
-                   </p>
-                   <p>
-                     <strong>Reason:</strong> {query.boycottingReasonDetails}
-                   </p>
-                   <p>
-                     <strong>Posted on:</strong>{" "}
-                     {new Date(query.createdAt).toLocaleString()}
-                   </p>
-                   <Link className="btn bg-pink-200" to={`/QueDetails/${query._id}`}>
-                     View Details
-                   </Link>
-             </div>
-           </div>
-            
+            <div className="card bg-base-100 shadow-xl rounded-lg">
+              <figure className="px-8 pt-8">
+                <img
+                  src={query.productImageUrl}
+                  alt={query.productName}
+                  className="rounded-lg h-48 w-full object-scale-down"
+                />
+              </figure>
+              <div className="card-body">
+                <h2 className="card-title text-xl text-center font-semibold mb-4">
+                  {query.queryTitle}
+                </h2>
+                <div className="space-y-2">
+                  <p>
+                    <span className="font-medium text-gray-700">
+                      Product Name:
+                    </span>{" "}
+                    {query.productName}
+                  </p>
+                  <p>
+                    <span className="font-medium text-gray-700">
+                      Product Brand:
+                    </span>{" "}
+                    {query.productBrand}
+                  </p>
+                  <p>
+                    <span className="font-medium text-gray-700">Reason:</span>{" "}
+                    {query.boycottingReasonDetails}
+                  </p>
+                  <p>
+                    <span className="font-medium text-gray-700">
+                      Posted on:
+                    </span>{" "}
+                    {new Date(query.createdAt).toLocaleString()}
+                  </p>
+                </div>
+                <div className="flex justify-left lg:justify-center mt-4">
+                  <Link
+                    className="btn  bg-pink-300 px-6 py-2 rounded-md "
+                    to={`/QueDetails/${query._id}`}
+                  >
+                    View Details
+                  </Link>
+                </div>
+              </div>
+            </div>
+
           ))}
           {queries.length === 0 && (
-            <p className="text-center text-gray-500">No recent queries found.</p>
+            <p className="text-center text-gray-500">
+              No recent queries found.
+            </p>
           )}
         </div>
-       }
-
-
+      )}
     </div>
   );
 };
