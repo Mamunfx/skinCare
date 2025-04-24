@@ -6,7 +6,7 @@ const Navbar = () => {
   
     return (
         <div>
-            <div className="navbar bg-pink-50 rounded-lg">
+            <div  className="navbar bg-pink-50 rounded-lg py-1 fixed top-0 left-0 right-0 z-50">
   <div className="navbar-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -41,9 +41,9 @@ const Navbar = () => {
       {
         user?<li className='text-lg'><Link to="/Dashboard">Dashboard</Link></li>:null
       }
-        
       </ul>
     </div>
+
 
     <div>
     <Link className="btn btn-ghost text-xl">
@@ -71,6 +71,9 @@ const Navbar = () => {
       }
       {
         user?<li className='text-lg'><Link to="/Dashboard">Dashboard</Link></li>:null
+      }
+      {
+        user?null:<li className='text-lg'><Link to="/AboutUs">About us</Link></li>
       }
     </ul>
   </div>

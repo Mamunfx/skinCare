@@ -10,9 +10,8 @@ const Slider = () => {
       <div className="hero-content flex flex-col lg:flex-row-reverse gap-8 p-4">
         <div className="w-full lg:w-1/2">
           <img
-            
             src="https://i.ibb.co.com/f4GTXZW/16348288-Woman-with-magnifier-analyzing-question-marks-1.jpg"
-            className="rounded-lg shadow-2xl w-full h-96 object-cover"
+            className="rounded-lg shadow-2xl w-full h-96 object-scale-down"
             alt="Product Analysis"
           />
         </div>
@@ -24,14 +23,14 @@ const Slider = () => {
           <p className="py-4 lg:py-6 ">
             Discover detailed recommendations and alternatives for the products you query about. Make informed decisions based on comprehensive insights and user recommendations.
           </p>
-          <div className="flex justify-center lg:justify-start gap-4">
+          <div className="flex justify-center lg:justify-start gap-4 pt-4">
             <Link to="/Queries" className="btn bg-pink-300 ">View Queries</Link>
-            <Link to="/Myque" className="btn  bg-pink-300">Learn More</Link>
+            <Link to="/Myque" className="btn btn-outline border-2 border-pink-300">Learn More</Link>
           </div>
         </div>
       </div>
     </div>
-    <div className="absolute left-5 right-5 bottom-36 flex -translate-y-1/2 transform justify-between">
+    <div className="absolute left-0 right-0 bottom-36 flex -translate-y-1/2 transform justify-between">
       <a href="#slide3" className="btn btn-circle">
         ❮
       </a>
@@ -47,7 +46,7 @@ const Slider = () => {
         <div className="w-full lg:w-1/2">
           <img
             src="https://i.ibb.co.com/LtPFVrT/22445014-2112-w037-n003-68-B-p1-68-1.jpg"
-            className="rounded-lg shadow-2xl w-full h-96 object-cover"
+            className="rounded-lg shadow-2xl w-full h-96 object-center"
             alt="User Recommendations"
           />
         </div>
@@ -59,14 +58,14 @@ const Slider = () => {
           <p className="py-4 lg:py-6">
             Get insights from other users' recommendations to find the best products for your needs. Share your own experiences and help others make informed choices.
           </p>
-          <div className="flex justify-center lg:justify-start gap-4">
-            <Link to="/Queries" className="btn bg-pink-300 ">View Recommendations</Link>
-            <Link to="/Myque" className="btn bg-pink-300">Learn More</Link>
+          <div className="flex justify-center lg:justify-start gap-4 pt-8">
+            <Link to="/Queries" className="btn bg-pink-300 ">Recommendations</Link>
+            <Link to="/Myque" className="btn btn-outline border-2 border-pink-300">Learn More</Link>
           </div>
         </div>
       </div>
     </div>
-    <div className="absolute left-5 right-5 bottom-36 flex -translate-y-1/2 transform justify-between">
+    <div className="absolute left-0 right-0 bottom-32 flex -translate-y-1/2 transform justify-between">
       <a href="#slide1" className="btn btn-circle">
         ❮
       </a>
@@ -82,7 +81,7 @@ const Slider = () => {
         <div className="w-full lg:w-1/2">
           <img
             src="https://i.ibb.co.com/2Y89KHN/11667041-20943401-1.jpg"
-            className="rounded-lg shadow-2xl w-full h-96 object-cover"
+            className="rounded-lg shadow-2xl w-full h-96 object-scale-down"
             alt="Expert Advice"
           />
         </div>
@@ -94,13 +93,13 @@ const Slider = () => {
           <p className="py-4 lg:py-6 ">
             Our platform provides expert advice and detailed analysis to help you choose the right products. Get personalized recommendations based on your needs.
           </p>
-          <div className="flex justify-center lg:justify-start gap-4">
+          <div className="flex justify-center lg:justify-start gap-4 pt-12">
             <Link to="/AddQue" className="btn bg-pink-300 ">Get Expert Advice</Link>
           </div>
         </div>
       </div>
     </div>
-    <div className="absolute left-5 right-5 bottom-36 flex -translate-y-1/2 transform justify-between">
+    <div className="absolute left-0 right-0 bottom-36 flex -translate-y-1/2 transform justify-between">
       <a href="#slide2" className="btn btn-circle ">
         ❮
       </a>

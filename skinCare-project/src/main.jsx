@@ -20,6 +20,7 @@ import NotFound from './Layouts/NotFound';
 import UpdateQue from './Layouts/UpdateQue';
 import Private_Route from './Components/PrivateRoute';
 import Dashboard from './Layouts/Dashboard';
+import AboutUs from './Layouts/AboutUs';
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path:"/Queries",
         element:<AllQue></AllQue>,
+      },
+      {
+        path:"/AboutUs",
+        element:<AboutUs></AboutUs>,
       },
       {
         path:"/login",
