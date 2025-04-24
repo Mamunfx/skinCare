@@ -60,12 +60,11 @@ const QueDetails = () => {
     };
 
     try {
-      const response = await axios.post(
+      await axios.post(
         "https://a11-server-tau.vercel.app/comments",
         newRecommendation,
         { withCredentials: true }
       );
-      const newComment = response.data;
 
       const commentsResponse = await axios.get(
         `https://a11-server-tau.vercel.app/Indivucomments/${id}`,
@@ -89,49 +88,53 @@ const QueDetails = () => {
   };
 
   if (loading) return <LoadingState />;
-  if (error) return <div>{error}</div>;
+  if (error) return <div className="text-red-500">{error}</div>;
 
   return (
-    <div className="container mx-auto py-6">
-      <h1 className="text-3xl font-bold mb-4">Query Details</h1>
+    <div className="container mx-auto py-10 px-6">
+      <h1 className="text-4xl font-bold text-gray-800 mb-8 text-center">Query Details</h1>
 
       {queryDetails ? (
-        <div className="p-4 border rounded-lg shadow-sm bg-white">
-          <h2 className="text-xl font-bold">{queryDetails.queryTitle}</h2>
-          <p>
+        <div className="p-6 border rounded-lg shadow-lg bg-gradient-to-r from-white to-gray-100">
+         <div className="flex flex-col lg:flex-row  justify-between px-12 lg:gap-8 ">
+
+         <div className="mt-2 lg:mt-12">
+          <h2 className="text-2xl font-bold  mb-4">{queryDetails.queryTitle}</h2>
+          <p className="mb-2 text-lg text-gray-700">
             <strong>Product Name:</strong> {queryDetails.productName}
           </p>
-          <p>
+          <p className="mb-2 text-lg text-gray-700">
             <strong>Product Brand:</strong> {queryDetails.productBrand}
           </p>
-          <p>
+          <p className="mb-2 text-lg text-gray-700">
             <strong>Reason:</strong> {queryDetails.boycottingReasonDetails}
           </p>
-          <p>
+          <p className="mb-2 text-lg text-gray-700">
             <strong>User Name:</strong> {queryDetails.userName}
           </p>
-          <p>
+          <p className="mb-2 text-lg text-gray-700">
             <strong>User Email:</strong> {queryDetails.userEmail}
           </p>
-          <p>
-            <strong>Posted On:</strong>{" "}
-            {new Date(queryDetails.createdAt).toLocaleString()}
+          <p className="mb-4 text-lg text-gray-700">
+            <strong>Posted On:</strong> {new Date(queryDetails.createdAt).toLocaleString()}
           </p>
-          <p>
-            <strong>Recommendation Count:</strong>{" "}
-            {queryDetails.recommendationCount}
-          </p>
-          <img
+          </div>
+
+         <div>
+         <img
             src={queryDetails.productImageUrl}
             alt={queryDetails.productName}
-            className="mt-4 max-w-full h-auto"
+            className="mt-4 rounded-lg max-w-full h-96 object-center mx-auto shadow-md"
           />
+         </div>
 
-          <div className="mt-6 border-t-2">
-            <h3 className="text-2xl font-bold mb-8">Add a Recommendation : </h3>
-            <form onSubmit={handleRecommendationSubmit} className="mb-4">
-              <div className="mb-2">
-                <label className="block text-sm font-bold mb-1">
+      </div>
+
+          <div className="mt-8">
+            <h3 className="text-2xl font-bold text-gray-800 pb-6">Add a Recommendation :</h3>
+            <form onSubmit={handleRecommendationSubmit} className="mt-6 space-y-4">
+              <div>
+                <label className="block text-sm font-bold text-gray-700 mb-1">
                   Recommendation Title
                 </label>
                 <input
@@ -139,12 +142,12 @@ const QueDetails = () => {
                   name="recommendationTitle"
                   value={formState.recommendationTitle}
                   onChange={handleInputChange}
-                  className="w-full p-2 border rounded-lg"
+                  className="w-full p-3 border rounded-lg shadow-sm"
                   required
                 />
               </div>
-              <div className="mb-2">
-                <label className="block text-sm font-bold mb-1">
+              <div>
+                <label className="block text-sm font-bold text-gray-700 mb-1">
                   Recommended Product Name
                 </label>
                 <input
@@ -152,73 +155,82 @@ const QueDetails = () => {
                   name="recommendedProductName"
                   value={formState.recommendedProductName}
                   onChange={handleInputChange}
-                  className="w-full p-2 border rounded-lg"
+                  className="w-full p-3 border rounded-lg shadow-sm"
                   required
                 />
               </div>
-              <div className="mb-2">
-                <label className="block text-sm font-bold mb-1">
-                  Recommended Product Image
+              <div>
+                <label className="block text-sm font-bold text-gray-700 mb-1">
+                  Recommended Product Image URL
                 </label>
                 <input
                   type="text"
                   name="recommendedProductImage"
                   value={formState.recommendedProductImage}
                   onChange={handleInputChange}
-                  className="w-full p-2 border rounded-lg"
+                  className="w-full p-3 border rounded-lg shadow-sm"
                 />
               </div>
-              <div className="mb-2">
-                <label className="block text-sm font-bold mb-1">
+              <div>
+                <label className="block text-sm font-bold text-gray-700 mb-1">
                   Recommendation Reason
                 </label>
                 <textarea
                   name="recommendationReason"
                   value={formState.recommendationReason}
                   onChange={handleInputChange}
-                  className="w-full p-2 border rounded-lg"
+                  className="w-full p-3 border rounded-lg shadow-sm"
                   required
                 />
               </div>
-              <button type="submit" className="btn bg-pink-200">
-                Add Recommendation
+              <button
+                type="submit"
+                className="w-full p-3 bg-gradient-to-r from-purple-300 to-pink-400 text-white font-bold rounded-lg shadow-md hover:shadow-xl transition-shadow"
+              >
+                Submit Recommendation
               </button>
             </form>
           </div>
 
-          <div className="mt-6 border-t-2">
-            <h3 className="text-2xl font-bold">Recommendations : </h3>
-            <div className="space-y-2 ">
+          <div className="mt-12">
+            <h3 className="text-2xl font-bold text-gray-800">Recommendations</h3>
+            <div className="space-y-4 mt-6">
               {recommendations.length ? (
                 recommendations.map((rec) => (
-                  <div key={rec._id} className="card bg-base-100  shadow-xl ">
-                  <div className="card-body flex flex-col">
-                    <div>
-                    <h2 className="card-title"># {rec.recommendationTitle}</h2>
-                    </div>
-                    <p >
-                      <strong>Recommended Product:</strong> {`${rec.recommendedProductName}`}
+                  <div
+                    key={rec._id}
+                    className="p-4 bg-white rounded-lg shadow-md transition-transform hover:scale-105"
+                  >
+                    <h4 className="text-lg font-bold text-purple-400">
+                      {rec.recommendationTitle}
+                    </h4>
+                    <p className="text-gray-700">
+                      <strong>Recommended Product:</strong> {rec.recommendedProductName}
                     </p>
-                    <p >Reason : {`${rec.recommendationReason}`}</p>
-                  </div>
-                  <small className="pl-6">Posted on: {new Date(rec.created_at).toLocaleString()}</small>
-                  <figure>
+                    <p className="text-gray-700">
+                      <strong>Reason:</strong> {rec.recommendationReason}
+                    </p>
+                    <small className="block mt-2 text-gray-500">
+                      Posted on: {new Date(rec.created_at).toLocaleString()}
+                    </small>
                     {rec.recommendedProductImage && (
-                      <img src={rec.recommendedProductImage} />
+                      <img
+                        src={rec.recommendedProductImage}
+                        alt={rec.recommendedProductName}
+                        className="mt-4 rounded-lg max-w-full h-auto shadow-sm"
+                      />
                     )}
-                  </figure>
-                </div>
+                  </div>
                 ))
               ) : (
-                <p>No recommendations found.</p>
+                <p className="text-gray-700">No recommendations found.</p>
               )}
             </div>
           </div>
         </div>
       ) : (
-        <p>No query details found.</p>
+        <p className="text-gray-500 text-center">No query details found.</p>
       )}
-
     </div>
   );
 };
