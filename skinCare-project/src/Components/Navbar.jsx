@@ -38,6 +38,9 @@ const Navbar = () => {
       {
         user?<li><Link to="/MyReco">My recomendations</Link></li>:""
       }
+      {
+        user?<li className='text-lg'><Link to="/Dashboard">Dashboard</Link></li>:null
+      }
         
       </ul>
     </div>
@@ -65,6 +68,9 @@ const Navbar = () => {
       }
       {
         user?<li className='text-lg'><Link to="/MyReco">My recomendations</Link></li>:null
+      }
+      {
+        user?<li className='text-lg'><Link to="/Dashboard">Dashboard</Link></li>:null
       }
     </ul>
   </div>

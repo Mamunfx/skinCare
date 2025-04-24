@@ -19,6 +19,7 @@ import QueDetails from './Layouts/QueDetails';
 import NotFound from './Layouts/NotFound';
 import UpdateQue from './Layouts/UpdateQue';
 import Private_Route from './Components/PrivateRoute';
+import Dashboard from './Layouts/Dashboard';
 
 const router = createBrowserRouter([
   {
@@ -66,6 +67,10 @@ const router = createBrowserRouter([
         element:<Private_Route><UpdateQue></UpdateQue></Private_Route>,
       },
     ]
+  },
+  {
+    path : "/Dashboard",
+    element:<Private_Route><Dashboard></Dashboard></Private_Route>,
   },
   {
     path:'*',
