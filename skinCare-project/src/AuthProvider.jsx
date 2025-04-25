@@ -46,20 +46,24 @@ const AuthProvider = ({ children }) => {
   const createNewUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password)
+    .then(()=>{
+      notify('User created successfully!')
+    })
       .catch(error => notifyError(error.message))
       .finally(() => {
         setLoading(false)
-        alert("Signed up !")
       });
   };
 
   const userLogin = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password)
+    .then(()=>{
+      notify('Logged successfully!')
+    })
       .catch(error => alert(error.message))
       .finally(() => {
         setLoading(false)
-        notify("Logged in !")
       });
   };
 
@@ -69,10 +73,13 @@ const AuthProvider = ({ children }) => {
     }
     setLoading(true);
     return signOut(auth)
+    .then(()=>{
+      notify('Logged out')
+    })
       .catch(error => notifyError(error.message))
       .finally(() => {
         setLoading(false)
-        notify('Logged out')
+        
       });
   };
 

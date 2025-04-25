@@ -11,7 +11,6 @@ const Dashboard = () => {
   const [email, setEmail] = useState(user?.email || "");
   const [profilePicture, setProfilePicture] = useState(user?.photoURL || "");
   const [menuOpen, setMenuOpen] = useState(false); 
-  console.log(user);
 
   const handleUpdate = () => {
     const updatedInfo = { displayName: name, photoURL: profilePicture };

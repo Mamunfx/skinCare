@@ -6,7 +6,7 @@ import { AuthContext } from "../AuthProvider";
 
 const QueDetails = () => {
   const { id } = useParams();
-  const { user } = useContext(AuthContext);
+  const { user,notify } = useContext(AuthContext);
   const [queryDetails, setQueryDetails] = useState(null);
   const [recommendations, setRecommendations] = useState([]);
   const [formState, setFormState] = useState({
@@ -82,6 +82,7 @@ const QueDetails = () => {
         recommendedProductImage: "",
         recommendationReason: "",
       });
+      notify("Recommendation submitted !")
     } catch (err) {
       console.error("Error submitting recommendation:", err);
     }
@@ -185,7 +186,7 @@ const QueDetails = () => {
               </div>
               <button
                 type="submit"
-                className="w-full p-3 bg-gradient-to-r from-purple-300 to-pink-400 text-white font-bold rounded-lg shadow-md hover:shadow-xl transition-shadow"
+                className="w-full p-3 bg-gradient-to-r from-pink-200 to-pink-300 text-white font-bold rounded-lg shadow-md hover:shadow-xl transition-shadow"
               >
                 Submit Recommendation
               </button>
@@ -201,7 +202,7 @@ const QueDetails = () => {
                     key={rec._id}
                     className="p-4 bg-white rounded-lg shadow-md transition-transform hover:scale-105"
                   >
-                    <h4 className="text-lg font-bold text-purple-400">
+                    <h4 className="text-lg font-bold text-pink-400">
                       {rec.recommendationTitle}
                     </h4>
                     <p className="text-gray-700">

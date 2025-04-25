@@ -7,7 +7,7 @@ import LoadingState from '../Components/LoadingState';
 const UpdateQue = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { user } = useContext(AuthContext);
+  const { notify } = useContext(AuthContext);
   const [queryDetails, setQueryDetails] = useState(null);
   const [formState, setFormState] = useState({
     productName: '',
@@ -50,6 +50,7 @@ const UpdateQue = () => {
     e.preventDefault();
     try {
       await axios.put(`https://a11-server-tau.vercel.app/queries/${id}`, formState,{withCredentials:true});
+      notify('Query updated successfully!');
       navigate('/Myque');
     } catch (error) {
       setError('Error updating query.');

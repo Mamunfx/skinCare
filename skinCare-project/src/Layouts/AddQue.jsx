@@ -3,7 +3,7 @@ import axios from 'axios';
 import { AuthContext } from './../AuthProvider';
 
 const AddQue = () => {
-  const {user}=useContext(AuthContext);
+  const {user,notify}=useContext(AuthContext);
   const userProfileImage= user?.photoURL;
   const userEmail= user?.email;
   const userName= user?.displayName;
@@ -43,7 +43,7 @@ const AddQue = () => {
         queryTitle: '',
         boycottingReasonDetails: ''
       });
-      alert("Added")
+      notify("Query added successfully !")
     } catch (error) {
       console.error('Error adding query:', error);
     }
