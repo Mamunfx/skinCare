@@ -102,7 +102,7 @@ const Home = () => {
                             </div>
                             <button
                                 type="submit"
-                                className="btn bg-pink-200 w-full dark:bg-blue-500 dark:text-gray-100"
+                                className="btn bg-pink-200 w-full dark:bg-pink-400 dark:text-gray-100"
                             >
                                 Send Message
                             </button>

@@ -41,6 +41,9 @@ const Navbar = () => {
       {
         user?<li className='text-lg'><Link to="/Dashboard">Dashboard</Link></li>:null
       }
+      {
+        user?null:<li className='text-lg'><Link to="/AboutUs">About us</Link></li>
+      }
       </ul>
     </div>
 
